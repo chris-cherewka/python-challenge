@@ -1,17 +1,24 @@
 import csv, os
 
-csvpath = os.path.join("Resources", "PyPoll_Resources_election_data.csv")
-analyzed_data = os.path.join("Resources", "election_results.txt")
+## this didnt run the right file when Ian and I ran from VS code...had to run it from command prompt
+## got differnt total number of votes in VS Code vs. command prompt (correct number in command prompt)
 
+#creating variables to import as .csv and export as .txt
+csvpath = os.path.join("Resources", "PyPoll_Resources_election_data.csv")
+analyzed_data = os.path.join("Resources", "election_results2.txt")
+
+#read in as csv file
 with open(csvpath, newline='') as csvfile:
     csvreader = csv.reader(csvfile, delimiter=',')
-    print(csvreader)
+    #print(csvreader)
     csv_header = next(csvreader)
     
-    #Declaring variables
+    #Defining lists
     votes = []
     county = []
+
     candidates = []
+
     khan = []
     correy = []
     li = []
@@ -23,19 +30,19 @@ with open(csvpath, newline='') as csvfile:
         county.append(row[1])
         candidates.append(row[2])
 
-    #VOTE COUNT
+    #total number of votes
     total_votes = (len(votes))
     #print(total_votes)
 
-    #Votes by Person
-    for candidate in candidates:
-        if candidate == "Khan":
+    #how many votes each person won
+    for c in candidates:
+        if c == "Khan":
             khan.append(candidates)
             khan_votes = len(khan)
-        elif candidate == "Correy":
+        elif c == "Correy":
             correy.append(candidates)
             correy_votes = len(correy)
-        elif candidate == "Li":
+        elif c == "Li":
             li.append(candidates)
             li_votes = len(li)
         else:
@@ -47,7 +54,7 @@ with open(csvpath, newline='') as csvfile:
     #print(otooley_votes)
     
     
-    #Percentages
+    #votes received percentages
     khan_percent = round(((khan_votes / total_votes) * 100), 2)
     correy_percent = round(((correy_votes / total_votes) * 100), 2)
     li_percent = round(((li_votes / total_votes) * 100), 2)
@@ -69,7 +76,7 @@ with open(csvpath, newline='') as csvfile:
 
 #Print Statements
 
-results = (
+results2 = (
 f"Election Results\n"
 f"-----------------------------------\n"
 f"Total Votes: {total_votes}\n"
@@ -83,7 +90,7 @@ f"Winner: {winner}\n"
 f"-----------------------------------\n"
 )
 
-print(results)
+print(results2)
 
 with open(analyzed_data, 'w') as txt_file:
-    txt_file.write(results)
+    txt_file.write(results2)
